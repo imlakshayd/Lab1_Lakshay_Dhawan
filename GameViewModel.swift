@@ -6,6 +6,13 @@ class GameViewModel: ObservableObject {
     @Published var correctCount: Int = 0
     @Published var wrongCount: Int = 0
     @Published var attempts: Int = 0
+    @Published var feedback: FeedbackType = .none
+    
+    enum FeedbackType {
+        case none
+        case correct
+        case wrong
+    }
     
     init() {
         startNewRound()
@@ -13,6 +20,7 @@ class GameViewModel: ObservableObject {
     
     func startNewRound() {
         generateRandomNumber()
+        feedback = .none
     }
     
     func generateRandomNumber() {
@@ -36,10 +44,16 @@ class GameViewModel: ObservableObject {
         let actuallyPrime = isNumberPrime(currentNumber)
         if isPrimeSelected == actuallyPrime {
             correctCount += 1
+            feedback = .correct
         } else {
             wrongCount += 1
+            feedback = .wrong
         }
         attempts += 1
-        startNewRound()
+        
+        // Delay next round
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.startNewRound()
+        }
     }
 }
