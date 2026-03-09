@@ -24,7 +24,8 @@ class GameViewModel: ObservableObject {
     
     /// Starts a new round of the game 
     func startNewRound() {
-        if attempts >= 10 {
+        let maxAttempts = 10
+        if attempts >= maxAttempts {
             showResultDialog = true
             timerCurrentSubscription?.cancel()
             return
