@@ -12,3 +12,6 @@ Open in Xcode and run on Simulator.
 - iOS 15.0+
 - Xcode 14.0+
 - Swift 5.0+
+
+## Author
+Lakshay Dhawan
