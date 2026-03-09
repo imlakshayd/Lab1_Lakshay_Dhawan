@@ -13,10 +13,10 @@ struct ContentView: View {
             Spacer()
             HStack {
                 Button("Prime") {
-                    // Action
+                    viewModel.checkAnswer(isPrimeSelected: true)
                 }
                 Button("Not Prime") {
-                    // Action
+                    viewModel.checkAnswer(isPrimeSelected: false)
                 }
             }
             .padding()
