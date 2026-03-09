@@ -11,6 +11,15 @@ struct ContentView: View {
             Text("\(viewModel.currentNumber)")
                 .font(.system(size: 80))
             Spacer()
+            HStack {
+                Button("Prime") {
+                    // Action
+                }
+                Button("Not Prime") {
+                    // Action
+                }
+            }
+            .padding()
         }
     }
 }
