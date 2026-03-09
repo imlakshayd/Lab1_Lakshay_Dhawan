@@ -14,6 +14,8 @@ class GameViewModel: ObservableObject {
         case wrong
     }
     
+    private var timerCurrentSubscription: AnyCancellable?
+    
     init() {
         startNewRound()
     }
@@ -21,6 +23,7 @@ class GameViewModel: ObservableObject {
     func startNewRound() {
         generateRandomNumber()
         feedback = .none
+        startTimer()
     }
     
     func generateRandomNumber() {
@@ -41,6 +44,7 @@ class GameViewModel: ObservableObject {
     }
     
     func checkAnswer(isPrimeSelected: Bool) {
+        timerCurrentSubscription?.cancel()
         let actuallyPrime = isNumberPrime(currentNumber)
         if isPrimeSelected == actuallyPrime {
             correctCount += 1
@@ -50,8 +54,25 @@ class GameViewModel: ObservableObject {
             feedback = .wrong
         }
         attempts += 1
-        
-        // Delay next round
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.startNewRound()
+        }
+    }
+    
+    func startTimer() {
+        timerCurrentSubscription?.cancel()
+        timerCurrentSubscription = Timer.publish(every: 5, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                self?.handleTimeout()
+            }
+    }
+    
+    func handleTimeout() {
+        wrongCount += 1
+        feedback = .wrong
+        attempts += 1
+        timerCurrentSubscription?.cancel()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.startNewRound()
         }
