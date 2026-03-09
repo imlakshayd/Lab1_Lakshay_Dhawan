@@ -16,7 +16,7 @@ class GameViewModel: ObservableObject {
         case wrong
     }
     
-    private var timerCurrentSubscription: AnyCancellable?
+    private var timerCurrentSubscription: AnyCancellable? // Timer for the 5-second countdown
     
     init() {
         startNewRound()
