@@ -52,7 +52,7 @@ struct ContentView: View {
                             .frame(width: 140, height: 60)
                             .background(Color.blue)
                             .cornerRadius(15)
-                            .shadow(radius: 2)
+                            .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
                     }
                     .disabled(viewModel.feedback != .none)
                     
@@ -66,7 +66,7 @@ struct ContentView: View {
                             .frame(width: 140, height: 60)
                             .background(Color.purple)
                             .cornerRadius(15)
-                            .shadow(radius: 2)
+                            .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
                     }
                     .disabled(viewModel.feedback != .none)
                 }
