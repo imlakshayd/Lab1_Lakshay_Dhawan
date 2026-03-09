@@ -11,8 +11,8 @@ struct ContentView: View {
             
             VStack(spacing: 45) {
                 Text("Prime Number Game")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.heavy)
                     .padding(.top, 40)
                 
                 Spacer()
