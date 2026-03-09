@@ -9,7 +9,7 @@ struct ContentView: View {
         ZStack {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 40) {
+            VStack(spacing: 45) {
                 Text("Prime Number Game")
                     .font(.largeTitle)
                     .fontWeight(.bold)
