@@ -3,7 +3,7 @@ import Combine
 
 class GameViewModel: ObservableObject {
     // MARK: - Properties
-    @Published var currentNumber: Int = 1
+    @Published var currentNumber: Int = 1 // Default start value
     @Published var correctCount: Int = 0
     @Published var wrongCount: Int = 0
     @Published var attempts: Int = 0
