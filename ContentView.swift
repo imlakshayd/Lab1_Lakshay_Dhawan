@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // MARK: - Properties
     @StateObject private var viewModel = GameViewModel()
     
     var body: some View {
