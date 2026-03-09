@@ -22,6 +22,7 @@ class GameViewModel: ObservableObject {
         startNewRound()
     }
     
+    /// Starts a new round of the game 
     func startNewRound() {
         if attempts >= 10 {
             showResultDialog = true
