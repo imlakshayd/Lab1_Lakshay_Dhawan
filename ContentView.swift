@@ -10,6 +10,16 @@ struct ContentView: View {
             Spacer()
             Text("\(viewModel.currentNumber)")
                 .font(.system(size: 80))
+            
+            // Feedback
+            if viewModel.feedback == .correct {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+            } else if viewModel.feedback == .wrong {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.red)
+            }
+            
             Spacer()
             HStack {
                 Button("Prime") {
