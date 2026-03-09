@@ -44,12 +44,12 @@ class GameViewModel: ObservableObject {
     func isNumberPrime(_ number: Int) -> Bool {
         if number <= 1 { return false }
         if number <= 3 { return true }
-        var i = 2
-        while i * i <= number {
-            if number % i == 0 {
+        var divisor = 2
+        while divisor * divisor <= number {
+            if number % divisor == 0 {
                 return false
             }
-            i += 1
+            divisor += 1
         }
         return true
     }
