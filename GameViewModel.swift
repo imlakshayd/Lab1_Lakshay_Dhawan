@@ -91,6 +91,8 @@ class GameViewModel: ObservableObject {
         }
     }
     
+    // MARK: - Reset State
+    
     func resetGame() {
         correctCount = 0
         wrongCount = 0
