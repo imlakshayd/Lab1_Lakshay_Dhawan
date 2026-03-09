@@ -5,6 +5,14 @@ class GameViewModel: ObservableObject {
     @Published var currentNumber: Int = 1
     
     init() {
-        // Init
+        startNewRound()
+    }
+    
+    func startNewRound() {
+        generateRandomNumber()
+    }
+    
+    func generateRandomNumber() {
+        currentNumber = Int.random(in: 1...100)
     }
 }
