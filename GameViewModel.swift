@@ -56,8 +56,8 @@ class GameViewModel: ObservableObject {
     
     func checkAnswer(isPrimeSelected: Bool) {
         timerCurrentSubscription?.cancel()
-        let actuallyPrime = isNumberPrime(currentNumber)
-        if isPrimeSelected == actuallyPrime {
+        let isActuallyPrime = isNumberPrime(currentNumber)
+        if isPrimeSelected == isActuallyPrime {
             correctCount += 1
             feedback = .correct
         } else {
