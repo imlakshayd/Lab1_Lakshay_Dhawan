@@ -26,11 +26,13 @@ struct ContentView: View {
                         .resizable()
                         .frame(width: 80, height: 80)
                         .foregroundColor(.green)
+                        .transition(.scale)
                 } else if viewModel.feedback == .wrong {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
                         .frame(width: 80, height: 80)
                         .foregroundColor(.red)
+                        .transition(.scale)
                 } else {
                     Color.clear.frame(width: 80, height: 80)
                 }
