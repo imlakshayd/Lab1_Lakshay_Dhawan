@@ -31,4 +31,15 @@ class GameViewModel: ObservableObject {
         }
         return true
     }
+    
+    func checkAnswer(isPrimeSelected: Bool) {
+        let actuallyPrime = isNumberPrime(currentNumber)
+        if isPrimeSelected == actuallyPrime {
+            correctCount += 1
+        } else {
+            wrongCount += 1
+        }
+        attempts += 1
+        startNewRound()
+    }
 }
