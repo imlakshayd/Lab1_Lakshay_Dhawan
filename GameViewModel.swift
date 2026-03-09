@@ -35,6 +35,8 @@ class GameViewModel: ObservableObject {
         startTimer()
     }
     
+    // MARK: - Game Logic
+    
     func generateRandomNumber() {
         currentNumber = Int.random(in: 1...100)
     }
