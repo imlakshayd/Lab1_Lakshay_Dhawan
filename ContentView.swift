@@ -13,7 +13,7 @@ struct ContentView: View {
                 Text("Prime Number Game")
                     .font(.system(.largeTitle, design: .rounded))
                     .fontWeight(.heavy)
-                    .padding(.top, 40)
+                    .padding(.top, 50)
                 
                 Spacer()
                 
