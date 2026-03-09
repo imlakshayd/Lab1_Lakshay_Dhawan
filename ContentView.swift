@@ -4,6 +4,7 @@ struct ContentView: View {
     // MARK: - Properties
     @StateObject private var viewModel = GameViewModel()
     
+    // MARK: - Body
     var body: some View {
         ZStack {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
