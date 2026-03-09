@@ -66,6 +66,7 @@ struct ContentView: View {
                             .frame(width: 140, height: 60)
                             .background(Color.purple)
                             .cornerRadius(15)
+                            .shadow(radius: 2)
                     }
                     .disabled(viewModel.feedback != .none)
                 }
