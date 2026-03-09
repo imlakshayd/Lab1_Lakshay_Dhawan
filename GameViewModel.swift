@@ -6,6 +6,7 @@ class GameViewModel: ObservableObject {
     @Published var correctCount: Int = 0
     @Published var wrongCount: Int = 0
     @Published var attempts: Int = 0
+    @Published var showResultDialog: Bool = false
     @Published var feedback: FeedbackType = .none
     
     enum FeedbackType {
@@ -21,6 +22,12 @@ class GameViewModel: ObservableObject {
     }
     
     func startNewRound() {
+        if attempts >= 10 {
+            showResultDialog = true
+            timerCurrentSubscription?.cancel()
+            return
+        }
+        
         generateRandomNumber()
         feedback = .none
         startTimer()
@@ -54,6 +61,7 @@ class GameViewModel: ObservableObject {
             feedback = .wrong
         }
         attempts += 1
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.startNewRound()
         }
@@ -76,5 +84,13 @@ class GameViewModel: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.startNewRound()
         }
+    }
+    
+    func resetGame() {
+        correctCount = 0
+        wrongCount = 0
+        attempts = 0
+        showResultDialog = false
+        startNewRound()
     }
 }
