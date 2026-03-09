@@ -9,11 +9,31 @@ struct ContentView: View {
         ZStack {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 45) {
+            VStack(spacing: 30) {
+                // Header Row (Score & Timer)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Score: \(viewModel.correctCount)")
+                            .font(.headline)
+                        Text("High Score: \(viewModel.highScore)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Spacer()
+                    
+                    Text("\(viewModel.timeRemaining)s")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(viewModel.timeRemaining <= 2 ? .red : .primary)
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                
                 Text("Prime Number Game")
-                    .font(.system(.largeTitle, design: .rounded))
+                    .font(.system(.title, design: .rounded))
                     .fontWeight(.heavy)
-                    .padding(.top, 50)
+                    .padding(.top, 10)
                 
                 Spacer()
                 

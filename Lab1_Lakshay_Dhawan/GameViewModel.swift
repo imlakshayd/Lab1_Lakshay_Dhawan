@@ -4,11 +4,22 @@ import Combine
 class GameViewModel: ObservableObject {
     // MARK: - Properties
     @Published var currentNumber: Int = 1 // Default start value
-    @Published var correctCount: Int = 0
+    @Published var correctCount: Int = 0 {
+        didSet {
+            // Update high score if current score surpasses it
+            if correctCount > highScore {
+                highScore = correctCount
+            }
+        }
+    }
     @Published var wrongCount: Int = 0
     @Published var attempts: Int = 0
     @Published var showResultDialog: Bool = false
     @Published var feedback: FeedbackType = .none
+    
+    // New properties for timer and high score
+    @Published var timeRemaining: Int = 5
+    @AppStorage("HighScore") var highScore: Int = 0
     
     enum FeedbackType {
         case none
@@ -33,6 +44,7 @@ class GameViewModel: ObservableObject {
         
         generateRandomNumber()
         feedback = .none
+        timeRemaining = 5 // reset timer
         startTimer()
     }
     
@@ -74,10 +86,16 @@ class GameViewModel: ObservableObject {
     
     func startTimer() {
         timerCurrentSubscription?.cancel()
-        timerCurrentSubscription = Timer.publish(every: 5, on: .main, in: .common)
+        timerCurrentSubscription = Timer.publish(every: 1.0, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
-                self?.handleTimeout()
+                guard let self = self else { return }
+                
+                if self.timeRemaining > 0 {
+                    self.timeRemaining -= 1
+                } else {
+                    self.handleTimeout()
+                }
             }
     }
     
