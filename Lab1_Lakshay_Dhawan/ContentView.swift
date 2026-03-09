@@ -1,24 +1,86 @@
-//
-//  ContentView.swift
-//  Lab1_Lakshay_Dhawan
-//
-//  Created by Lakshay Dhawan on 2026-02-18.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    // MARK: - Properties
+    @StateObject private var viewModel = GameViewModel()
+    
+    // MARK: - Body
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 45) {
+                Text("Prime Number Game")
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.heavy)
+                    .padding(.top, 50)
+                
+                Spacer()
+                
+                Text("\(viewModel.currentNumber)")
+                    .font(.system(size: 80, weight: .heavy, design: .rounded))
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                if viewModel.feedback == .correct {
+                    Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .foregroundColor(.green)
+                        .transition(.scale)
+                } else if viewModel.feedback == .wrong {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .foregroundColor(.red)
+                        .transition(.scale)
+                } else {
+                    Color.clear.frame(width: 80, height: 80)
+                }
+                
+                Spacer()
+                
+                HStack(spacing: 30) {
+                    Button(action: {
+                        viewModel.checkAnswer(isPrimeSelected: true)
+                    }) {
+                        Text("Prime")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .frame(width: 140, height: 60)
+                            .background(Color.blue)
+                            .cornerRadius(15)
+                            .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
+                    }
+                    .disabled(viewModel.feedback != .none)
+                    
+                    Button(action: {
+                        viewModel.checkAnswer(isPrimeSelected: false)
+                    }) {
+                        Text("Not Prime")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .frame(width: 140, height: 60)
+                            .background(Color.purple)
+                            .cornerRadius(15)
+                            .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
+                    }
+                    .disabled(viewModel.feedback != .none)
+                }
+                .padding(.bottom, 50)
+            }
         }
-        .padding()
+        .alert(isPresented: $viewModel.showResultDialog) {
+            Alert(
+                title: Text("Game Over"),
+                message: Text("Correct: \(viewModel.correctCount)\nWrong: \(viewModel.wrongCount)"),
+                dismissButton: .default(Text("Restart")) {
+                    viewModel.resetGame()
+                }
+            )
+        }
     }
-}
-
-#Preview {
-    ContentView()
 }
