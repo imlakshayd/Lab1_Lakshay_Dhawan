@@ -4,6 +4,13 @@ struct ContentView: View {
     @StateObject private var viewModel = GameViewModel()
     
     var body: some View {
-        Text("Prime Game")
+        VStack {
+            Text("Prime Number Game")
+                .font(.largeTitle)
+            Spacer()
+            Text("\(viewModel.currentNumber)")
+                .font(.system(size: 80))
+            Spacer()
+        }
     }
 }
